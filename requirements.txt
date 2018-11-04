@@ -1,4 +1,4 @@
-discord-rewrite
+discord.py[voice] ~= 1.0.0
 pip
 asyncio
 requests
