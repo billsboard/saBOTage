@@ -685,4 +685,4 @@ async def yt(ctx, *args):
         await ctx.send("**You must enter a number between 1 and 5.**")
 
 
-bot.run(os.environ["NTA0NDkzNjQ3MzE2NjQ3OTM2.DrF6-w.FRKFOaUaJGwKtRYF62x0Jt2RK2A"])  # run the bot
+bot.run(os.environ["BOT-TOKEN"])  # run the bot
