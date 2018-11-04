@@ -1,6 +1,7 @@
-discord.py[voice] ~= 1.0.0
+discord-rewrite
+discord.ext
 pip
 asyncio
 random
 requests
-wordnet
+nltk.corpus
