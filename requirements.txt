@@ -2,4 +2,3 @@ discord-rewrite
 pip
 asyncio
 requests
-nltk.corpus
