@@ -1,12 +1,12 @@
 import asyncio
 import discord
-import os
 import random
 import requests
 from discord.ext import commands
 from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
+TOKEN = "NTA0NDkzNjQ3MzE2NjQ3OTM2.DrF6-w.FRKFOaUaJGwKtRYF62x0Jt2RK2A"  # bot token
 bot.remove_command("help")  # replaces old help command with custom help
 
 
@@ -28,18 +28,26 @@ async def on_message(message):
         await message.channel.send("Bot prefix is **//**")
     await bot.process_commands(message)
 
+    f = open(r"C:\Users\lyndo\Programming\Python\banned_words.txt", 'r')
+    chat_filter = tuple(f.read().splitlines())
+    f.close()
+    contents = message.content.split(" ")
+    for word in contents:
+        if word.lower() in chat_filter and not isinstance(message.channel, discord.DMChannel):
+            await discord.Message.delete(message)
+            await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
+
 
 @bot.event
 async def on_command_error(ctx, error):
     pass
-
 
 """GRAPHICS"""
 
 
 @bot.command(name="nuke-pic")  # sends picture of a nuke
 async def nuke_pic(ctx):
-    await bot.get_channel(ctx.message.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\nuke\nuke{}.jpg"
+    await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\nuke\nuke{}.jpg"
                         .format(random.randint(1, 15))))
 
 
@@ -71,11 +79,11 @@ async def st_pic(ctx, type = None):
     elif type.lower() == "text":
         await ctx.send(random.choice(st_text))
     elif type.lower() == "paint":
-        await bot.get_channel(ctx.message.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\paint.png"))
+        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\paint.png"))
     elif type.lower() == "ink":
-        await bot.get_channel(ctx.message.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\ink.png"))
+        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\ink.png"))
     elif type.lower() == "draw":
-        await bot.get_channel(ctx.message.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\draw{}.jpg".format(random.randint(1, 3))))
+        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\draw{}.jpg".format(random.randint(1, 3))))
     else:
         await ctx.send("**That is not a valid option. Please enter** `text`**,** `paint`**,** `ink` **or** `draw`**.**")
 
@@ -170,7 +178,7 @@ async def help(ctx):
        "```")
     await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
        "= Configuration =\n"
-       "clear <amount = 100>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
+       "clear <amount>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
        "```")
     await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
        "= Fun =\n"
@@ -286,7 +294,8 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
-async def clear(ctx, amount = 100):
+async def clear(ctx, amount):
+        #return await ctx.send("**You must have manage channels permissions.**")
     if amount in tuple(range(1, 501)):
         await ctx.channel.purge(limit=amount)
     else:
@@ -594,6 +603,9 @@ async def on_error(ctx, error):
 @bot.command()  # gets a definition of a word from the urban dictionary
 async def urban(ctx, word, define = 1):
     try:
+        if not ctx.channel.is_nsfw():
+            return await ctx.send("**You can't use this command here.**")
+
         urban_data = requests.get("http://urbanscraper.herokuapp.com/search/{}".format(word.lower())).json()
 
         await ctx.send("**Definition:** {}".format(urban_data[define - 1]["definition"]))
