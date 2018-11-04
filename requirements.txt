@@ -1,5 +1,4 @@
 discord-rewrite
-discord.ext
 pip
 asyncio
 random
