@@ -2,3 +2,4 @@ discord-rewrite
 pip
 asyncio
 requests
+aiohttp>=1.0.0,<1.1.0
