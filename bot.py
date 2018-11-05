@@ -438,7 +438,7 @@ async def guess_num(ctx):
 
 
 @bot.command()
-async def roast(ctx):
+async def roast(ctx, member: discord.Member):
     if not ctx.channel.is_nsfw():
         return await ctx.send("**You can't use this command here.**")
 
@@ -454,7 +454,7 @@ async def roast(ctx):
               "Your ass must be pretty jealous of all the shit that comes out of your mouth.",
               "Were you born on the highway? That is where most accidents happen.",
               "Shut up, you'll never be the man your mother is.")
-    ctx.send("{}\n🔥🔥🔥😝😝".format(random.choice(roasts)))
+    await ctx.send("Hey {}, {}\n🔥🔥🔥😝😝".format(member.mention, random.choice(roasts)))
 
 
 @bot.command()
