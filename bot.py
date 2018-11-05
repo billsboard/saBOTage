@@ -7,7 +7,6 @@ from discord.ext import commands
 from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
-TOKEN = "NTA0NDkzNjQ3MzE2NjQ3OTM2.DsE8aw.aJAjSamxZmSiRMZpcLvR_tYIr9E"  # bot token
 bot.remove_command("help")  # replaces old help command with custom help
 
 
