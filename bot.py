@@ -31,11 +31,12 @@ async def on_message(message):
     f = open(r"C:\Users\lyndo\Programming\Python\banned_words.txt", 'r')
     chat_filter = tuple(f.read().splitlines())
     f.close()
-    contents = message.content.split(" ")
-    for word in contents:
-        if word.lower() in chat_filter and not isinstance(message.channel, discord.DMChannel):
+    
+    for word in chat_filter:
+        if word in message.content.lower() and not isinstance(message.channel, discord.DMChannel):
             await discord.Message.delete(message)
             await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
+
 
 
 @bot.event
