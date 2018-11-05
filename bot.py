@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import os
 import random
 import requests
 from discord.ext import commands
