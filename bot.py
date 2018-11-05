@@ -295,7 +295,7 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
-async def clear(ctx, amount):
+async def clear(ctx, amount: int):
         #return await ctx.send("**You must have manage channels permissions.**")
     if amount in tuple(range(1, 501)):
         await ctx.channel.purge(limit=amount)
