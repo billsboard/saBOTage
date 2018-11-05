@@ -185,7 +185,7 @@ async def help(ctx):
        "joke <type = you>           :: Bot will give a <type> joke (<type> = [Yo Momma = ym, Knock Knock = kk]).\n"
        "rps                         :: Plays rock, paper, scissors, with the bot.\n"
        "roast                       :: Bot sends a roast text to you.\n"
-       "emoji <type>                :: Sends emoji art based on <type> (<type> = frozen, up, dirty (NSFW), chess).\n"
+       "emoji <type>                :: Sends emoji art based on <type> (<type> = frozen, up, man, chess).\n"
        "```")
     await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
        "= Utilities =\n"
@@ -477,7 +477,7 @@ async def emoji(ctx, type):
                        "             🏠   ☁️\n"
                        "   ☁️         ☁️\n"
                        "🌳🌹🏫🌳🏢🏢_🏢🏢🌳🌳")
-    elif type == "dirty":
+    elif type == "man":
         if not ctx.channel.is_nsfw():
             return await ctx.send("**You can't use this command here.**")
 
