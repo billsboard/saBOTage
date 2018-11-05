@@ -6,7 +6,7 @@ from discord.ext import commands
 from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
-TOKEN = "NTA0NDkzNjQ3MzE2NjQ3OTM2.DrF6-w.FRKFOaUaJGwKtRYF62x0Jt2RK2A"  # bot token
+TOKEN = "NTA0NDkzNjQ3MzE2NjQ3OTM2.DsE8aw.aJAjSamxZmSiRMZpcLvR_tYIr9E"  # bot token
 bot.remove_command("help")  # replaces old help command with custom help
 
 
@@ -325,8 +325,7 @@ async def joke(ctx, type):
                     "ugly Fix-It Felix said, 'I can\'t fix it.'"
                     "stupid when an intruder broke into her house, she ran downstairs, dialed 9-1-1 on the microwave, and couldn't find the 'CALL' button.",
                     "stupid she stuck a battery up her ass and said, 'I GOT THE POWER!'",
-                    "stupid that she sat on the TV to watch the couch.",
-                    "ugly when you popped out, the doctor said *aww.. what a treasure*, and your mom said *yeah lets bury it.*")
+                    "stupid that she sat on the TV to watch the couch.")
         await ctx.send("**Hey {}**, Yo momma so {}".format(ctx.message.author.name, random.choice(yo_momma)))
     elif type.lower() == "kk":
         await ctx.send("Knock Knock.")
@@ -439,19 +438,14 @@ async def guess_num(ctx):
 
 @bot.command()
 async def roast(ctx, member: discord.Member):
-    if not ctx.channel.is_nsfw():
-        return await ctx.send("**You can't use this command here.**")
-
     roasts = ("I'd give you a nasty look, but you've already got one.",
               "I love what you’ve done with your hair. How do you get it to come out of the nostrils like that?",
               "It looks like your face caught fire and someone tried to put it out with a hammer.",
-              "I’d like to see things from your point of view, but I can’t seem to get my head that far up your ass.",
               "Just because you have one doesn’t mean you need to act like one.",
               "I’m sorry, was I meant to be offended? The only thing offending me is your face.",
               "You are proof that evolution can go in reverse.",
               "I thought of you today. It reminded me to take the garbage out",
               "I’d slap you but I don’t want to make your face look any better.",
-              "Your ass must be pretty jealous of all the shit that comes out of your mouth.",
               "Were you born on the highway? That is where most accidents happen.",
               "Shut up, you'll never be the man your mother is.")
     await ctx.send("Hey {}, {}\n🔥🔥🔥😝😝".format(member.mention, random.choice(roasts)))
@@ -695,6 +689,7 @@ async def yt(ctx, *args):
         await ctx.send("https://www.youtube.com/watch?v={}".format(yt_url["items"][int(num.content) - 1]["id"]["videoId"]))
     else:
         await ctx.send("**You must enter a number between 1 and 5.**")
+
 
 
 bot.run(str(os.environ.get("BOT_TOKEN")))  # run the bot
