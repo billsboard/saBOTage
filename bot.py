@@ -31,17 +31,12 @@ async def on_message(message):
     f = open(r"C:\Users\lyndo\Programming\Python\banned_words.txt", 'r')
     chat_filter = tuple(f.read().splitlines())
     f.close()
-    
+
     for word in chat_filter:
         if word in message.content.lower() and not isinstance(message.channel, discord.DMChannel):
             await discord.Message.delete(message)
             await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
 
-
-
-@bot.event
-async def on_command_error(ctx, error):
-    pass
 
 """GRAPHICS"""
 
@@ -146,8 +141,8 @@ async def fortune_cookie(ctx):
 
 @bot.command()  # help command for new users
 async def help(ctx):
-    await bot.get_user(ctx.message.author.id).send(":blue_book: __**saBOTage Help Commands**__")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send(":blue_book: __**saBOTage Help Commands**__")
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Graphics =\n"
        "nuke-pic                    :: Picks a random picture of a nuke.\n"
        "dog-pic                     :: Picks a random picture of a dog.\n"
@@ -155,7 +150,7 @@ async def help(ctx):
        "st-pic                      :: Picks a random picture of a square twitter (type = text, paint, ink, draw).\n"
        "meme                        :: Shows a meme.\n"
        "```")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Random =\n"
        "roll <sides = 6>            :: Rolls a dice with a specified amount of sides.\n"
        "flip                        :: Flips a coin (Heads = 10/21, Tails = 10/21, Side = 1/21).\n"
@@ -164,7 +159,7 @@ async def help(ctx):
        "guess-num                   :: Asks user to guess the bot's number, which is between 1 and 100.\n"
        "f-cookie                    :: Opens a fortune cookie.\n"
        "```")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Information =\n"
        "help                        :: Gives the commands of the saBOTage bot.\n"
        "user-avatar <@user = you>   :: Shows a link and a picture of <@user> avatar.\n"
@@ -177,18 +172,18 @@ async def help(ctx):
        "user-info <@user = you>     :: Lists <@user> name, id, status, date joined, top role, and avatar URL.\n"
        "user-list                   :: Lists all of the users from the channel's server, and their top role.\n"
        "```")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Configuration =\n"
        "clear <amount>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
        "```")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Fun =\n"
        "joke <type = you>           :: Bot will give a <type> joke (<type> = [Yo Momma = ym, Knock Knock = kk]).\n"
        "rps                         :: Plays rock, paper, scissors, with the bot.\n"
        "roast                       :: Bot sends a roast text to you.\n"
        "emoji <type>                :: Sends emoji art based on <type> (<type> = frozen, up, man, chess).\n"
        "```")
-    await bot.get_user(ctx.message.author.id).send("```asciidoc\n"
+    await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Utilities =\n"
        "PvsT                        :: Compares Pewdiepie and T-Series's subscriber counts.\n"
        "sub-count <username>        :: Gets subscriber count of youtuber. (remove symbols/spaces in <username>).\n"
@@ -207,28 +202,28 @@ async def help(ctx):
 @bot.command(name="user-avatar")  # generates picture of user's avatar
 async def user_avatar(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     await ctx.send("{0.mention}\nhttps://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(member))
 
 
 @bot.command(name="user-id")  # shows user's id
 async def user_id(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     await ctx.send("{0.mention}: {0.id}".format(member))
 
 
 @bot.command(name="user-name")  # shows user's name
 async def user_name(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     await ctx.send("{0.mention}: {0.name}".format(member))
 
 
 @bot.command(name="user-status")   # shows user's status
 async def user_status(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
 
     if member.status == discord.Status.online:
         await ctx.send("{}: Online".format(member.mention))
@@ -243,14 +238,14 @@ async def user_status(ctx, member: discord.Member = None):
 @bot.command(name="user-joined")  # shows when user joined
 async def user_joined(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     await ctx.send("{0.mention}: {0.joined_at}".format(member))
 
 
 @bot.command(name="user-roles")  # shows user's roles
 async def user_roles(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
 
     roles = member.roles
     del roles[0]
@@ -263,14 +258,14 @@ async def user_roles(ctx, member: discord.Member = None):
 @bot.command(name="user-toprole")  # shows user's top role
 async def user_toprole(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     await ctx.send("{0.mention}: {0.top_role}".format(member))
 
 
 @bot.command(name="user-info")  # shows all user's info
 async def user_info(ctx, member: discord.Member = None):
     if member is None:
-        member = ctx.message.author
+        member = ctx.author
     embed = discord.Embed(colour=discord.Color.blue())
     embed.add_field(name="Name: ", value=member.name, inline=False)
     embed.add_field(name="ID: ", value=member.id, inline=False)
@@ -285,7 +280,7 @@ async def user_info(ctx, member: discord.Member = None):
 @bot.command(name="user-list")  # shows server's members
 async def user_list(ctx):
     embed = discord.Embed(colour=discord.Colour.blue())
-    for member in ctx.message.guild.members:
+    for member in ctx.guild.members:
         embed.add_field(name=member, value=member.top_role, inline=False)
 
     await ctx.send(embed=embed)
@@ -323,17 +318,15 @@ async def joke(ctx, type):
                     "stupid when an intruder broke into her house, she ran downstairs, dialed 9-1-1 on the microwave, and couldn't find the 'CALL' button.",
                     "stupid she stuck a battery up her ass and said, 'I GOT THE POWER!'",
                     "stupid that she sat on the TV to watch the couch.")
-        await ctx.send("**Hey {}**, Yo momma so {}".format(ctx.message.author.name, random.choice(yo_momma)))
+        await ctx.send("**Hey {}**, Yo momma so {}".format(ctx.author.name, random.choice(yo_momma)))
     elif type.lower() == "kk":
         await ctx.send("Knock Knock.")
 
-        if ctx.message.author == bot.user:
+        if ctx.author.bot == bot.user:
             return
-        
-        def check(m):
-            return m.content in ("who's there", "who's there?")m.channel == channel
-        
-        wt_response = await bot.wait_for("message", timeout=10, check=check)
+
+        wt_response = await bot.wait_for("message", timeout=10, check=lambda message: message.author == ctx.author)
+
         if wt_response is None:
             await ctx.send("**Sorry, you took too long.**")
         elif wt_response.content.lower() in ("who's there", "who's there?"):
@@ -353,7 +346,7 @@ async def joke(ctx, type):
             chosen_joke = [kk[joke_num][0], kk[joke_num][1]]
             await ctx.send(chosen_joke[0])
 
-            xwho_response = await bot.wait_for("message", timeout=20)
+            xwho_response = await bot.wait_for("message", timeout=20, check=lambda message: message.author == ctx.author)
             if xwho_response is None:
                 await ctx.send("**Sorry, you took too long.**")
             elif xwho_response.content in ("{} who".format(chosen_joke[0]), "{} who?".format(chosen_joke[0])):
@@ -373,7 +366,11 @@ async def rps(ctx):
     choices = ("rock", "paper", "scissors")
 
     computer = random.choice(choices)
-    player = await bot.wait_for("message", timeout=10)
+    try:
+        player = await bot.wait_for("message", timeout=10, check=lambda message: message.author == ctx.author)
+    except asyncio.TimeoutError:
+        return await ctx.send("**Sorry, {}, you took too long.**".format(ctx.author.mention))
+
     if player.content.lower() not in choices:
         return await ctx.send("**That is not a valid choice.**")
 
@@ -395,18 +392,18 @@ async def rps(ctx):
 async def guess_num(ctx):
     try:
         await ctx.send("Pick an integer between 1 and 100.")
-        if ctx.message.author == bot.user:
+        if ctx.author == bot.user:
             return
 
         try:
-            guess = await bot.wait_for("message", timeout=10.0)
+            guess = await bot.wait_for("message", timeout=10.0, check=lambda message: message.author == ctx.author)
         except asyncio.TimeoutError:
-            return await ctx.send("**Sorry, {}, you took too long.**".format(ctx.message.author.mention))
+            return await ctx.send("**Sorry {}, you took too long.**".format(ctx.author.mention))
 
         answer = random.randint(1, 100)
         counter = 0
         while True:
-            if ctx.message.author == bot.user:
+            if ctx.author == bot.user:
                 return
 
             counter += 1
@@ -417,16 +414,16 @@ async def guess_num(ctx):
                 await ctx.send("**Your guess is too high. Guess again.**")
 
                 try:
-                    guess = await bot.wait_for("message", timeout=10.0)
+                    guess = await bot.wait_for("message", timeout=10.0, check=lambda message: message.author == ctx.author)
                 except asyncio.TimeoutError:
-                    return await ctx.send("**Sorry, {}, you took too long.**".format(ctx.message.author.mention))
+                    return await ctx.send("**Sorry {}, you took too long.**".format(ctx.author.mention))
             elif int(guess.content) < answer:
                 await ctx.send("**Your guess is too low. Guess again.**")
 
                 try:
-                    guess = await bot.wait_for("message", timeout=10.0)
+                    guess = await bot.wait_for("message", timeout=10.0, check=lambda message: message.author == ctx.author)
                 except asyncio.TimeoutError:
-                    return await ctx.send("**Sorry, {}, you took too long.**".format(ctx.message.author.mention))
+                    return await ctx.send("**Sorry, {}, you took too long.**".format(ctx.author.mention))
             else:
                 if counter <= 1:
                     return await ctx.send("**Congratulations!** You got it on your first attempt.")
@@ -442,6 +439,7 @@ async def roast(ctx, member: discord.Member):
               "I love what you’ve done with your hair. How do you get it to come out of the nostrils like that?",
               "It looks like your face caught fire and someone tried to put it out with a hammer.",
               "Just because you have one doesn’t mean you need to act like one.",
+              "I’m sorry, was I meant to be offended? The only thing offending me is your face.",
               "You are proof that evolution can go in reverse.",
               "I thought of you today. It reminded me to take the garbage out",
               "I’d slap you but I don’t want to make your face look any better.",
