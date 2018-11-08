@@ -331,7 +331,7 @@ async def joke(ctx, type):
             return
         
         def check(m):
-            return m.channel == channel
+            return m.content in ("who's there", "who's there?")m.channel == channel
         
         wt_response = await bot.wait_for("message", timeout=10, check=check)
         if wt_response is None:
@@ -442,7 +442,6 @@ async def roast(ctx, member: discord.Member):
               "I love what you’ve done with your hair. How do you get it to come out of the nostrils like that?",
               "It looks like your face caught fire and someone tried to put it out with a hammer.",
               "Just because you have one doesn’t mean you need to act like one.",
-              "I’m sorry, was I meant to be offended? The only thing offending me is your face.",
               "You are proof that evolution can go in reverse.",
               "I thought of you today. It reminded me to take the garbage out",
               "I’d slap you but I don’t want to make your face look any better.",
