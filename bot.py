@@ -329,8 +329,11 @@ async def joke(ctx, type):
 
         if ctx.message.author == bot.user:
             return
-
-        wt_response = await bot.wait_for("message", timeout=10)
+        
+        def check(m):
+            return m.channel == channel
+        
+        wt_response = await bot.wait_for("message", timeout=10, check=check)
         if wt_response is None:
             await ctx.send("**Sorry, you took too long.**")
         elif wt_response.content.lower() in ("who's there", "who's there?"):
