@@ -512,7 +512,7 @@ async def pewdiepie_vs_tseries(ctx):
     pew_subs = pew_data["items"][0]["statistics"]["subscriberCount"]
     t_subs = t_data["items"][0]["statistics"]["subscriberCount"]
 
-    await ctx.send("**Pewdiepie:** {} Subscribers\n**T-Series:**    {} Subscribers".format(pew_subs, t_subs))
+    await ctx.send("**PewDiePie:** {} Subscribers\n**T-Series:**    {} Subscribers".format(pew_subs, t_subs))
 
 
 @bot.command(name="sub-count")  # gets sub count of any youtuber
