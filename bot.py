@@ -297,7 +297,10 @@ async def clear(ctx, amount: int):
 
 @clear.error
 async def on_error(ctx, error):
-    await ctx.send("`amount` **must be an integer from 1 to 500.**")
+    if not isinstance(error, commands.CommandInvokeError):
+        await ctx.send("`amount` **must be an integer from 1 to 500.**")
+    else:
+        await ctx.send("The bot is missing the permissions to use this command.")
 
 
 """FUN"""
