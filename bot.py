@@ -36,12 +36,6 @@ async def on_message(message):
         if word in message.content.lower() and not isinstance(message.channel, discord.DMChannel):
             await discord.Message.delete(message)
             await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
-
-
-@bot.event
-async def on_command_error(ctx, error):
-    if discord.Forbidden:
-        await ctx.send("**This bot does not have the permissions to use this command.**")
         
         
 """GRAPHICS"""
@@ -297,11 +291,14 @@ async def user_list(ctx):
 
 @bot.command()  # clears inputted channel
 async def clear(ctx, amount: int):
-    if amount in tuple(range(1, 501)):
-        await ctx.channel.purge(limit=amount)
-    else:
-        await ctx.send("`amount` **must be an integer between 1 and 500.**")
-
+    try:
+        if amount in tuple(range(1, 501)):
+            await ctx.channel.purge(limit=amount)
+        else:
+            await ctx.send("`amount` **must be an integer between 1 and 500.**")
+    except discord.Forbidden:
+        await ctx.send("**This bot does not have the permissions to use this command.**")
+        
 
 @clear.error
 async def on_error(ctx, error):
