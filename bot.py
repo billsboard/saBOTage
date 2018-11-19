@@ -297,7 +297,7 @@ async def clear(ctx, amount: int):
 
 @clear.error
 async def on_error(ctx, error):
-    if not isinstance(error, commands.CommandInvokeError):
+    if isinstance(error, discord.Forbidden):
         await ctx.send("The bot is missing the permissions to use this command.")
     else:
         await ctx.send("`amount` **must be an integer from 1 to 500.**")
