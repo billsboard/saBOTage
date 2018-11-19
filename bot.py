@@ -38,6 +38,12 @@ async def on_message(message):
             await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
 
 
+@bot.event
+async def on_command_error(ctx, error):
+    if discord.Forbidden:
+        await ctx.send("**This bot does not have the permissions to use this command.**")
+        
+        
 """GRAPHICS"""
 
 
@@ -293,14 +299,14 @@ async def user_list(ctx):
 async def clear(ctx, amount: int):
     if amount in tuple(range(1, 501)):
         await ctx.channel.purge(limit=amount)
+    else:
+        await ctx.send("`amount` **must be an integer between 1 and 500.**")
 
 
 @clear.error
 async def on_error(ctx, error):
-    if isinstance(error, discord.Forbidden):
-        await ctx.send("The bot is missing the permissions to use this command.")
-    else:
-        await ctx.send("`amount` **must be an integer from 1 to 500.**")
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("`amount` **must be an integer between 1 and 500.**")
 
 
 """FUN"""
