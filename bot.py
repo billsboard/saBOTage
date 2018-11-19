@@ -174,7 +174,7 @@ async def help(ctx):
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Configuration =\n"
-       "clear <amount>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
+       "clear <amount = 500>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Fun =\n"
