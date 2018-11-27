@@ -381,11 +381,11 @@ async def rps(ctx):
     }
 
     if player.content.lower() == computer:
-        await ctx.send("**Tie!** You both chose {}.".format(computer))
+        await ctx.send("**Tie!** We both chose {}.".format(computer))
     elif player.content.lower() in beats[computer]:
-        await ctx.send("**You win!** You chose {}, Computer chose {}.".format(player.content, computer))
+        await ctx.send("**You win!** You chose {}, I chose {}.".format(player.content, computer))
     else:
-        await ctx.send("**You lose!** You chose {}, Computer chose {}.".format(player.content, computer))
+        await ctx.send("**You lose!** You chose {}, I chose {}.".format(player.content, computer))
 
 
 @bot.command(name="guess-num")
