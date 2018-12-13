@@ -68,7 +68,7 @@ async def meme(ctx):
 
 @bot.command(name="st-pic")  # sends picture of a square twitter
 async def st_pic(ctx, type = None):
-    st_text = (r"/;\\>")
+    st_text = ("[;]>", "(;)>", "{;}>", "|;|>", r"/;\\>", )
 
 
     if type is None:
