@@ -5,4 +5,4 @@ requests == 2.20.0
 aiohttp == 3.4.4
 websockets == 7.0
 yarl == 1.2.6
-chardet == 3.0.3
+chardet == 3.0.4
