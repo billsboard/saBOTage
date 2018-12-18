@@ -27,15 +27,6 @@ async def on_message(message):
     if message.content == "<@504493647316647936>":
         await message.channel.send("Bot prefix is **//**")
     await bot.process_commands(message)
-
-    f = open(r"C:\Users\lyndo\Programming\Python\banned_words.txt", 'r')
-    chat_filter = tuple(f.read().splitlines())
-    f.close()
-
-    for word in chat_filter:
-        if word in message.content.lower() and not isinstance(message.channel, discord.DMChannel):
-            await discord.Message.delete(message)
-            await bot.get_channel(message.channel.id).send("{}, **You are not allowed to use that word here! Next time it will be a loss of permissions.**".format(message.author.mention))
         
         
 """GRAPHICS"""
