@@ -295,17 +295,6 @@ async def clear(ctx, amount: int = 500):
 """FUN"""
 
 
-@bot.command()
-async def killbrendanwiththeexcalibur(ctx):
-    phrases = ["You killed him with an excalibur! 420420 XP Earned.", 
-               "Oh Noes! His Sinistral Metatarsal Joint broke.",
-               "He tuned into a pile of dust before you even hit him.",
-               "Critcical Hit! He developed Ebola virus.",
-               "You hit him so hard he flailed across the Earth back at your face.",
-               "You accidently hit Bill instead. OOPS!"]
-    await ctx.send(random.choice(phrases))
-    
-    
 @bot.command()  # bot says a joke
 async def joke(ctx, type):
     if type.lower() == "ym":
@@ -515,7 +504,7 @@ async def pewdiepie_vs_tseries(ctx):
     pew_subs = pew_data["items"][0]["statistics"]["subscriberCount"]
     t_subs = t_data["items"][0]["statistics"]["subscriberCount"]
 
-    await ctx.send("**PewDiePie:** {} Subscribers\n**T-Series:**    {} Subscriber\n**Sub Gap:** {}".format(pew_subs, t_subs, abs(pew_subs - t_subs))
+    await ctx.send("**PewDiePie:** {} Subscribers\n**T-Series:**    {} Subscriber\n**Sub Gap:** {}".format(pew_subs, t_subs, abs(pew_subs - t_subs)))
 
 
 @bot.command(name="sub-count")  # gets sub count of any youtuber
