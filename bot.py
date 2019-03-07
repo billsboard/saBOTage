@@ -289,6 +289,8 @@ async def clear(ctx, amount: int = 500):
                 await ctx.channel.purge(limit=amount)
             else:
                 await ctx.send("`amount` **must be an integer between 1 and 500.**")
+        else:
+            await ctx.send("**You do not have permissions to run this command**");
     except discord.Forbidden:
         await ctx.send("**This bot does not have the permissions to use this command.**")
 
