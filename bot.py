@@ -203,6 +203,7 @@ async def help(ctx):
        "rps                         :: Plays rock, paper, scissors, with the bot.\n"
        "roast                       :: Bot sends a roast text to you.\n"
        "emoji <type>                :: Sends emoji art based on <type> (<type> = frozen, up, man, chess).\n"
+       "kill <@user> <weapon>       :: Kills a user using a specified weapon.\n" 
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Utilities =\n"
@@ -739,7 +740,7 @@ async def dict(ctx, word = None, define = 1):
         await ctx.send("**Not a valid word |** `define` **is out of range.**")
 
 
-@bot.command()  # gets the theoretical similaarity of two words
+@bot.command()  # gets the theoretical similarity of two words
 async def similar(ctx, w1 = None, w2 = None):
     if w1 is None or w2 is None:
         return await ctx.send("**Must enter two parameters.**")
