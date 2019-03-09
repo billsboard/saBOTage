@@ -157,7 +157,7 @@ async def fortune_cookie(ctx):
     await ctx.send(random.choice(fortunes))
 
 
-"""INFO"""
+"""INFORMATION"""
 
 
 @bot.command()  # help command for new users
@@ -588,6 +588,24 @@ async def emoji(ctx, type):
 async def on_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("**Must give a `type` parameter.**")
+        
+        
+@bot.command()
+async def kill(ctx, member: discord.Member, *args):
+    verbs = (
+        "destroyed",
+        "sliced in half",
+        "brutally murdered",
+        "absolutely demolished",
+        "struck",
+        "beaten to death",
+        "trampled on",
+        "tortured",
+        "gruelingly dissected",
+        "chopped into tiny, sub-atomic particles",
+        "ferociously stabbed"
+    )
+    await ctx.send("{} was {} by a {}.".format(member.mention, random.choice(verbs), " ".join(args)))
         
 
 """UTILITIES"""
