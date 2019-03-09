@@ -1,3 +1,5 @@
+"""Please do NOT abuse my api keys, get your own."""
+
 import asyncio
 import discord
 import os
@@ -34,8 +36,29 @@ async def on_message(message):
 
 @bot.command(name="nuke-pic")  # sends picture of a nuke
 async def nuke_pic(ctx):
-    await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\nuke\nuke{}.jpg"
-                        .format(random.randint(1, 15))))
+    nukes = (
+        "https://nationalinterest.org/sites/default/files/styles/desktop__1486_x_614/public/main_images/atomic_bomb.jpg?itok=cUVH4gSg",
+        "https://i.kinja-img.com/gawker-media/image/upload/s--WUTtaPrX--/c_scale,f_auto,fl_progressive,q_80,w_800/jfjo1ikh3pffcavavgiw.jpg",
+        "https://i.ytimg.com/vi/-1JFKU9fJfM/hqdefault.jpg",
+        "https://www.defencetalk.com/wp-content/uploads/2017/02/poland-wants-us-or-european-nuclear-umbrella-kaczynski-01.jpg",
+        "https://c.ndtvimg.com/2018-10/jb1etgrk_nuclear-test-generic-istock_625x300_23_October_18.jpg",
+        "https://nationalinterest.org/sites/default/files/styles/resize-1440/public/main_images/Nuclear%20Bomb_0.jpg?itok=_-GjiOrF",
+        "https://www.radionz.co.nz/assets/news_crops/42527/eight_col_bravocolor1.jpg?1505707045",
+        "http://media2.govtech.com/images/940*630/nuc+%282%292.jpg",
+        "https://thumbs-prod.si-cdn.com/sIkNe_eIDylRJqhqZX7gk2KHtYc=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/dd/44/dd44ce31-4cc3-46c0-9378-0ec0da5a13e0/02_10_2014_romeo_nuke.jpg",
+        "https://t2.rbxcdn.com/80a408a9af72d79bc34ee4ec0eede71c",
+        "https://thenypost.files.wordpress.com/2017/05/051917-nuke-nasa-1.jpg?quality=90&strip=all&w=618&h=410&crop=1",
+        "http://c0.thejournal.ie/media/2015/09/mars-nuke-752x501.jpg",
+        "https://www.theamericanconservative.com/wp-content/uploads/2016/10/Nuclear2-554x350.jpg",
+        "https://nationalpostcom.files.wordpress.com/2016/08/529235836.jpg?quality=80&strip=all&w=780",
+        "http://www.52dazhew.com/data/out/173/586952801-nuke-wallpapers.jpg",
+        "https://vignette.wikia.nocookie.net/dbz-dokkanbattle/images/2/23/Nuke.gif/revision/latest?cb=20170420230427"
+    )
+
+    embed = discord.Embed()
+    embed.set_image(url=random.choice(nukes))
+
+    await ctx.send(embed=embed)
 
 
 @bot.command(name="dog-pic")  # sends picture of a dog
@@ -57,21 +80,20 @@ async def meme(ctx):
     await ctx.send(meme_data["data"][random.randint(0, len(meme_data["data"]) - 1)]["image"])
 
 
-@bot.command(name="st-pic")  # sends picture of a square twitter
-async def st_pic(ctx, type = None):
-    st_text = ("[;]>", "(;)>", "{;}>", "|;|>", r"/;\\>", )
+async def st_pic(ctx, st_type = None):
+    st_text = ("[;]>", "(;)>", "{;}>", "|;|>", r"/;\\>", "[;)>", "£[;]>")
+    embed = discord.Embed();
 
-
-    if type is None:
+    if st_type is None:
         await ctx.send("**You must enter a** `type` **parameter.**")
-    elif type.lower() == "text":
+    elif st_type.lower() == "text":
         await ctx.send(random.choice(st_text))
-    elif type.lower() == "paint":
-        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\paint.png"))
-    elif type.lower() == "ink":
-        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\ink.png"))
-    elif type.lower() == "draw":
-        await bot.get_channel(ctx.channel.id).send(file=discord.File(r"C:\Users\lyndo\OneDrive\Pictures\Saved Pictures\Discord\st\draw{}.jpg".format(random.randint(1, 3))))
+    elif st_type.lower() == "paint":
+        await ctx.send(embed=embed.set_image(url="https://i.imgur.com/WM5NVjT.png"))
+    elif st_type.lower() == "ink":
+        await ctx.send(embed=embed.set_image(url="https://i.imgur.com/q8TSLm9.png"))
+    elif st_type.lower() == "draw":
+        await ctx.send(embed=embed.set_image(url="https://i.imgur.com/d8GazB7.png"))
     else:
         await ctx.send("**That is not a valid option. Please enter** `text`**,** `paint`**,** `ink` **or** `draw`**.**")
 
@@ -83,12 +105,19 @@ async def roll(ctx, sides = 6):
     try:
         await ctx.send("You rolled a {}.".format(random.randint(1, sides)))
     except ValueError:
-        await ctx.send("`sides` must be a natural number.")
+        await ctx.send("**`sides` must be a natural number.**")
+
+
+@roll.error  # error handling for roll command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**`sides` must be a natural number.**")
+
 
 @bot.command()  # flip a coin
 async def flip(ctx):
     sides = ["heads"] * 10 + ["tails"] * 10 + ["the coin on its side!"]
-    await ctx.send("You flipped **{}**.".format(random.choice(sides)))
+    await ctx.send("You flipped {}.".format(random.choice(sides)))
 
 
 @bot.command()  # picks a random card from a deck of cards
@@ -101,7 +130,7 @@ async def card(ctx):
 @bot.command(name="8ball")  # a magic 8-ball
 async def eight_ball(ctx, *args):
     if len(args) == 0:
-        return await ctx.send("**Must ask a question.**")
+        return await ctx.send("**Must ask a yes/no question.**")
 
     question = ""
     for word in args:
@@ -118,7 +147,7 @@ async def eight_ball(ctx, *args):
     await ctx.send(responses[len(str(question)) % 25])
 
 
-@bot.command(name="f-cookie")
+@bot.command(name="f-cookie") # tells a fortune from a cookie
 async def fortune_cookie(ctx):
     fortunes = ("Your future will come with riches.", "You open your heart to people you care for.", "Something you have longed for will no longer be a dream.",
                 "The fortune you seek is in another cookie.", "A cynic is only a frustrated optimist.", "A foolish man listens to his heart. A wise man listens to cookies",
@@ -198,6 +227,12 @@ async def user_avatar(ctx, member: discord.Member = None):
     await ctx.send("{0.mention}\nhttps://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(member))
 
 
+@user_avatar.error  # error handling for user-avatar command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
+
+
 @bot.command(name="user-id")  # shows user's id
 async def user_id(ctx, member: discord.Member = None):
     if member is None:
@@ -205,11 +240,23 @@ async def user_id(ctx, member: discord.Member = None):
     await ctx.send("{0.mention}: {0.id}".format(member))
 
 
+@user_id.error  # error handling for user-id command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
+
+
 @bot.command(name="user-name")  # shows user's name
 async def user_name(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.author
     await ctx.send("{0.mention}: {0.name}".format(member))
+
+
+@user_name.error  # error handling for user-name command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
 
 
 @bot.command(name="user-status")   # shows user's status
@@ -227,11 +274,23 @@ async def user_status(ctx, member: discord.Member = None):
         await ctx.send("{}: Idle".format(member.mention))
 
 
+@user_status.error  # error handling for user-status command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
+
+
 @bot.command(name="user-joined")  # shows when user joined
 async def user_joined(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.author
     await ctx.send("{0.mention}: {0.joined_at}".format(member))
+
+
+@user_joined.error  # error handling for user-joined command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
 
 
 @bot.command(name="user-roles")  # shows user's roles
@@ -247,11 +306,23 @@ async def user_roles(ctx, member: discord.Member = None):
         await ctx.send(role)
 
 
+@user_roles.error  # error handling for user-roles command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
+
+
 @bot.command(name="user-toprole")  # shows user's top role
 async def user_toprole(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.author
     await ctx.send("{0.mention}: {0.top_role}".format(member))
+
+
+@user_toprole.error  # error handling for user-toprole command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
 
 
 @bot.command(name="user-info")  # shows all user's info
@@ -269,12 +340,17 @@ async def user_info(ctx, member: discord.Member = None):
     await ctx.send(embed=embed)
 
 
+@user_info.error  # error handling for user-info command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("**Parameter must be a member.**")
+
+
 @bot.command(name="user-list")  # shows server's members
 async def user_list(ctx):
     embed = discord.Embed(colour=discord.Colour.blue())
     for member in ctx.guild.members:
         embed.add_field(name=member, value=member.top_role, inline=False)
-
     await ctx.send(embed=embed)
 
 
@@ -292,12 +368,18 @@ async def clear(ctx, amount: int = 500):
         await ctx.send("**This bot does not have the permissions to use this command.**")
 
 
+@clear.error  # error handling for clear command
+async def on_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("`amount` **must be an integer between 1 and 500.**")
+
+
 """FUN"""
 
 
 @bot.command()  # bot says a joke
-async def joke(ctx, type):
-    if type.lower() == "ym":
+async def joke(ctx, joke_type):
+    if joke_type.lower() == "ym":
         yo_momma = ("fat, I took a picture of her last Christmas and it's still printing.",
                     "fat when she got on the scale it said, 'I need your weight not your phone number.'",
                     "fat and old when God said, 'Let there be light', he asked your mother to move out of the way.",
@@ -311,7 +393,7 @@ async def joke(ctx, type):
                     "stupid she stuck a battery up her ass and said, 'I GOT THE POWER!'",
                     "stupid that she sat on the TV to watch the couch.")
         await ctx.send("**Hey {}**, Yo momma so {}".format(ctx.author.name, random.choice(yo_momma)))
-    elif type.lower() == "kk":
+    elif joke_type.lower() == "kk":
         await ctx.send("Knock Knock.")
 
         if ctx.author.bot == bot.user:
@@ -351,6 +433,12 @@ async def joke(ctx, type):
         await ctx.send("**Not a joke type.** `type` **must be** `ym` **or** `kk`**.**")
 
 
+@joke.error  # error handling for joke command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `type`.**")
+
+
 @bot.command()
 async def rps(ctx):
     await ctx.send("Welcome to Rock, Paper, Scissors. **Please select a weapon: (`rock`, `paper`, `scissors`).**")
@@ -373,11 +461,11 @@ async def rps(ctx):
     }
 
     if player.content.lower() == computer:
-        await ctx.send("**Tie!** We both chose {}.".format(computer))
+        await ctx.send("**Tie!** You both chose {}.".format(computer))
     elif player.content.lower() in beats[computer]:
-        await ctx.send("**You win!** You chose {}, I chose {}.".format(player.content, computer))
+        await ctx.send("**You win!** You chose {}, Computer chose {}.".format(player.content, computer))
     else:
-        await ctx.send("**You lose!** You chose {}, I chose {}.".format(player.content, computer))
+        await ctx.send("**You lose!** You chose {}, Computer chose {}.".format(player.content, computer))
 
 
 @bot.command(name="guess-num")
@@ -440,6 +528,14 @@ async def roast(ctx, member: discord.Member):
     await ctx.send("Hey {}, {}\n🔥🔥🔥😝😝".format(member.mention, random.choice(roasts)))
 
 
+@roast.error  # error handling for roast command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `member` to roast at.**")
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("**Not a valid `member`.**")
+
+
 @bot.command()
 async def emoji(ctx, type):
     if type == "frozen":
@@ -487,6 +583,11 @@ async def emoji(ctx, type):
                        "🏃🐴👼👰🙇👼🐴🏃")
 
 
+@emoji.error  # error handling for emoji command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `type` parameter.**")
+        
 
 """UTILITIES"""
 
@@ -518,6 +619,12 @@ async def sub_count(ctx, username):
         await ctx.send("**Not a valid username.**")
 
 
+@sub_count.error  # error handling for sub-count command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `username` parameter.**")
+
+
 @bot.command(name="view-count")  # gets view count of any youtuber
 async def view_count(ctx, username):
     try:
@@ -529,6 +636,12 @@ async def view_count(ctx, username):
         await ctx.send("**Not a valid username.**")
 
 
+@view_count.error  # error handling for view-count command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `username` parameter.**")
+
+
 @bot.command(name="video-count")  # gets video count of any youtuber
 async def video_count(ctx, username):
     try:
@@ -538,6 +651,12 @@ async def video_count(ctx, username):
         await ctx.send("**{}**: {}".format(username, user_videos))
     except IndexError:
         await ctx.send("**Not a valid username.**")
+
+
+@video_count.error  # error handling for video-count command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Must give a `username` parameter.**")
 
 
 @bot.command()  # gets bitcoin value in a currency type
