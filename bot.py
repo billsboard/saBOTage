@@ -82,7 +82,7 @@ async def meme(ctx):
 
 async def st_pic(ctx, st_type = None):
     st_text = ("[;]>", "(;)>", "{;}>", "|;|>", r"/;\\>", "[;)>", "£[;]>")
-    embed = discord.Embed();
+    embed = discord.Embed()
 
     if st_type is None:
         await ctx.send("**You must enter a** `type` **parameter.**")
@@ -165,59 +165,62 @@ async def help(ctx):
     await bot.get_user(ctx.author.id).send(":blue_book: __**saBOTage Help Commands**__")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Graphics =\n"
-       "nuke-pic                    :: Picks a random picture of a nuke.\n"
-       "dog-pic                     :: Picks a random picture of a dog.\n"
-       "cat-pic                     :: Picks a random picture of a cat.\n"
-       "st-pic                      :: Picks a random picture of a square twitter (type = text, paint, ink, draw).\n"
-       "meme                        :: Shows a meme.\n"
+       "nuke-pic                     :: Picks a random picture of a nuke.\n"
+       "dog-pic                      :: Picks a random picture of a dog.\n"
+       "cat-pic                      :: Picks a random picture of a cat.\n"
+       "st-pic                       :: Picks a random picture of a square twitter (type = text, paint, ink, draw).\n"
+       "meme                         :: Shows a meme.\n"
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Random =\n"
-       "roll <sides = 6>            :: Rolls a dice with a specified amount of sides.\n"
-       "flip                        :: Flips a coin (Heads = 10/21, Tails = 10/21, Side = 1/21).\n"
-       "card                        :: Names a random card from a 52-card deck.\n"
-       "8ball <question>            :: Answers a question using the Magic 8-Ball (25 Choices).\n"
-       "guess-num                   :: Asks user to guess the bot's number, which is between 1 and 100.\n"
-       "f-cookie                    :: Opens a fortune cookie.\n"
+       "roll <sides = 6>             :: Rolls a dice with a specified amount of sides.\n"
+       "flip                         :: Flips a coin (Heads = 10/21, Tails = 10/21, Side = 1/21).\n"
+       "card                         :: Names a random card from a 52-card deck.\n"
+       "8ball <question>             :: Answers a question using the Magic 8-Ball (25 Choices).\n"
+       "guess-num                    :: Asks user to guess the bot's number, which is between 1 and 100.\n"
+       "f-cookie                     :: Opens a fortune cookie.\n"
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Information =\n"
-       "help                        :: Gives the commands of the saBOTage bot.\n"
-       "user-avatar <@user = you>   :: Shows a link and a picture of <@user> avatar.\n"
-       "user-id <@user = you>       :: Shows the ID of <@user>.\n"
-       "user-name <@user = you>     :: Shows name of <@user>.\n"
-       "user-status <@user = you>   :: Shows the status of <@user>.\n"
-       "user-joined <@user = you>   :: Shows date when <@user> joined the server.\n"
-       "user-roles <@user = you>    :: Lists all of the roles of <@user>.\n"
-       "user-toprole <@user = you>  :: Shows the top tole of <@user>.\n"
-       "user-info <@user = you>     :: Lists <@user> name, id, status, date joined, top role, and avatar URL.\n"
-       "user-list                   :: Lists all of the users from the channel's server, and their top role.\n"
+       "help                         :: Gives the commands of the saBOTage bot.\n"
+       "user-avatar <@user = you>    :: Shows a link and a picture of <@user> avatar.\n"
+       "user-id <@user = you>        :: Shows the ID of <@user>.\n"
+       "user-name <@user = you>      :: Shows name of <@user>.\n"
+       "user-status <@user = you>    :: Shows the status of <@user>.\n"
+       "user-joined <@user = you>    :: Shows date when <@user> joined the server.\n"
+       "user-roles <@user = you>     :: Lists all of the roles of <@user>.\n"
+       "user-toprole <@user = you>   :: Shows the top tole of <@user>.\n"
+       "user-info <@user = you>      :: Lists <@user> name, id, status, date joined, top role, and avatar URL.\n"
+       "user-list                    :: Lists all of the users from the channel's server, and their top role.\n"
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Configuration =\n"
-       "clear <amount = 500>        :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
+       "clear <amount = 500>         :: Deletes <amount> number of messages from channel (<amount> within [1, 500]).\n"
+       "kick <@user> <reason = None> :: Kicks <user> with an optional <reason>.\n"
+       "create-role <name>           :: Creates a role with a specified <name>.\n"
+       "give-role <name> <@user>     :: Gives the role with a specified <name> to a <@user>." 
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Fun =\n"
-       "joke <type = you>           :: Bot will give a <type> joke (<type> = [Yo Momma = ym, Knock Knock = kk]).\n"
-       "rps                         :: Plays rock, paper, scissors, with the bot.\n"
-       "roast                       :: Bot sends a roast text to you.\n"
-       "emoji <type>                :: Sends emoji art based on <type> (<type> = frozen, up, man, chess).\n"
-       "kill <@user> <weapon>       :: Kills a user using a specified weapon.\n" 
+       "joke <type = you>            :: Bot will give a <type> joke (<type> = [Yo Momma = ym, Knock Knock = kk]).\n"
+       "rps                          :: Plays rock, paper, scissors, with the bot.\n"
+       "roast                        :: Bot sends a roast text to you.\n"
+       "emoji <type>                 :: Sends emoji art based on <type> (<type> = frozen, up, man, chess).\n"
+       "kill <@user> <weapon>        :: Kills a user using a specified weapon.\n" 
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Utilities =\n"
-       "PvsT                        :: Compares Pewdiepie and T-Series's subscriber counts.\n"
-       "sub-count <username>        :: Gets subscriber count of youtuber. (remove symbols/spaces in <username>).\n"
-       "view-count <username>       :: Gets view count of youtuber. (remove symbols/spaces in <username>).\n"
-       "video-count <username>      :: Gets video count of youtuber. (remove symbols/spaces in <username>).\n"
-       "bitcoin <currency = CAD>    :: Gets bitcoin value in <currency>, which should be in abbreviated form.\n"
-       "forecast <city> <data>      :: Gets <data> forecast of <city>, (<data> = temp, weather, air).\n"
-       "urban <word> <define = 1>   :: Gets a definition of a <word>, example, and link from the urban dictionary (NSFW).\n"
-       "dict <word> <define = 1>    :: Gets a definition and an example of a <word> from wordnet.\n"
-       "similar <w1> <w2>           :: Gets the similarity of <w1> and <w2> in a percentage, which must both be nouns.\n"
-       "wiki <name>                 :: Provides a link to a Wikipedia article about <name>.\n"
-       "yt <search>                 :: Shows and plays results from a youtube search about <search>.\n"
+       "PvsT                         :: Compares Pewdiepie and T-Series's subscriber counts.\n"
+       "sub-count <username>         :: Gets subscriber count of youtuber. (remove symbols/spaces in <username>).\n"
+       "view-count <username>        :: Gets view count of youtuber. (remove symbols/spaces in <username>).\n"
+       "video-count <username>       :: Gets video count of youtuber. (remove symbols/spaces in <username>).\n"
+       "bitcoin <currency = CAD>     :: Gets bitcoin value in <currency>, which should be in abbreviated form.\n"
+       "forecast <city> <data>       :: Gets <data> forecast of <city>, (<data> = temp, weather, air).\n"
+       "urban <word> <define = 1>    :: Gets a definition of a <word>, example, and link from the urban dictionary (NSFW).\n"
+       "dict <word> <define = 1>     :: Gets a definition and an example of a <word> from wordnet.\n"
+       "similar <w1> <w2>            :: Gets the similarity of <w1> and <w2> in a percentage, which must both be nouns.\n"
+       "wiki <name>                  :: Provides a link to a Wikipedia article about <name>.\n"
+       "yt <search>                  :: Shows and plays results from a youtube search about <search>.\n"
        "```")
 
 
@@ -373,6 +376,46 @@ async def clear(ctx, amount: int = 500):
 async def on_error(ctx, error):
     if isinstance(error, commands.BadArgument):
         await ctx.send("`amount` **must be an integer between 1 and 500.**")
+        
+        
+@bot.command()
+async def kick(ctx, member: discord.Member, reason = None):
+    try:
+        await ctx.send("**{} has been kicked.**".format(member.mention))
+        await member.kick(reason=reason)
+    except discord.Forbidden:
+        await ctx.send("**This bot does not have the permissions to use this command.**")
+
+
+@bot.command(name="create-role")
+async def create_role(ctx, name):
+    try:
+        await ctx.guild.create_role(name=name)
+    except discord.Forbidden:
+        await ctx.send("**This bot does not have the permissions to use this command.**")
+
+
+@create_role.error  # error handling for create-role command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Requires a `name` parameter.**")
+
+
+@bot.command(name="give-role")
+async def give_role(ctx, name, member: discord.Member = None):
+    if member is None:
+        member = ctx.author
+    role = discord.utils.get(ctx.guild.roles, name=name)
+    await member.add_roles(role)
+
+
+@give_role.error  # error handling for give-role command
+async def on_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("**Requires a `name` parameter.**")
+        
+        
+@bot.
 
 
 """FUN"""
@@ -744,16 +787,16 @@ async def on_error(ctx, error):
         await ctx.send("**Must enter** `word` **parameter.**")
 
 
-@bot.command()  # gets a definition from the google dictionary
-async def dict(ctx, word = None, define = 1):
+@bot.command(name="dict")  # gets a definition from the google dictionary
+async def dictionary(ctx, word = None, define = 1):
     try:
         if word is None:
             return await ctx.send("**Must enter a word.**")
 
-        syns = wordnet.synsets(word.lower())
+        synsets = wordnet.synsets(word.lower())
 
-        await ctx.send("**Definition:** {}".format(syns[define - 1].definition()))
-        await ctx.send("**Example:** {}".format(syns[define - 1].examples()[0]))
+        await ctx.send("**Definition:** {}".format(synsets[define - 1].definition()))
+        await ctx.send("**Example:** {}".format(synsets[define - 1].examples()[0]))
     except IndexError:
         await ctx.send("**Not a valid word |** `define` **is out of range.**")
 
