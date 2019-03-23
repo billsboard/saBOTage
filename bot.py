@@ -414,9 +414,6 @@ async def on_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("**Requires a `name` parameter.**")
         
-        
-@bot.
-
 
 """FUN"""
 
