@@ -80,6 +80,7 @@ async def meme(ctx):
     await ctx.send(meme_data["data"][random.randint(0, len(meme_data["data"]) - 1)]["image"])
 
 
+@bot.command(name="st-pic")
 async def st_pic(ctx, st_type = None):
     st_text = ("[;]>", "(;)>", "{;}>", "|;|>", r"/;\\>", "[;)>", "£[;]>")
     embed = discord.Embed()
