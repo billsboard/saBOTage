@@ -1,4 +1,4 @@
-discord-rewrite == 1.2.2
+discord-rewrite == 1.0.0
 pip == 18.1
 nltk == 3.3
 requests == 2.20.0
