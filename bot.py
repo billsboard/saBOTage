@@ -363,7 +363,6 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
-@has_permissions(manage_messages=True)
 async def clear(ctx, amount: int = 499):
     try:
         if amount in tuple(range(1, 500)):
