@@ -363,10 +363,10 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
-async def clear(ctx, amount: int = 500):
+async def clear(ctx, amount: int = 499):
     try:
-        if amount in tuple(range(1, 501)):
-            await ctx.channel.purge(limit=amount)
+        if amount in tuple(range(1, 500)):
+            await ctx.channel.purge(limit=amount+1)
         else:
             await ctx.send("`amount` **must be an integer between 1 and 500.**")
     except discord.Forbidden:
