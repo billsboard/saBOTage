@@ -363,6 +363,7 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
+@has_permissions(manage_messages=True)
 async def clear(ctx, amount: int = 499):
     try:
         if amount in tuple(range(1, 500)):
@@ -380,6 +381,7 @@ async def on_error(ctx, error):
         
         
 @bot.command()
+@has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, reason = None):
     try:
         await ctx.send("**{} has been kicked.**".format(member.mention))
