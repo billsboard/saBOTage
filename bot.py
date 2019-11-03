@@ -383,7 +383,6 @@ async def on_error(ctx, error):
 @bot.command()
 @commands.has_permissions(administrator=True)
 async def kick(ctx, member: discord.Member, reason = None):
-    if member
     try:
         await ctx.send("**{} has been kicked.**".format(member.mention))
         await member.kick(reason=reason)
