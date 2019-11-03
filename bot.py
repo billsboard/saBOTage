@@ -407,10 +407,9 @@ async def on_error(ctx, error):
 
 @bot.command(name="give-role")
 @commands.has_permissions(manage_roles=True)
-async def give_role(ctx, name, member: discord.Member = None):
+async def give_role(ctx, * name: discord.Role, member: discord.Member = None):
     if member is None:
         member = ctx.author
-    role = discord.utils.get(member.server.roles, name=name)
     await member.add_roles(role)
 
 
