@@ -363,6 +363,7 @@ async def user_list(ctx):
 
 
 @bot.command()  # clears inputted channel
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int = 499):
     try:
         if amount in tuple(range(1, 500)):
@@ -380,7 +381,9 @@ async def on_error(ctx, error):
         
         
 @bot.command()
+@commands.has_permissions(administrator=True)
 async def kick(ctx, member: discord.Member, reason = None):
+    if member
     try:
         await ctx.send("**{} has been kicked.**".format(member.mention))
         await member.kick(reason=reason)
@@ -389,6 +392,7 @@ async def kick(ctx, member: discord.Member, reason = None):
 
 
 @bot.command(name="create-role")
+@commands.has_permissions(manage_roles=True)
 async def create_role(ctx, name):
     try:
         await ctx.guild.create_role(name=name)
@@ -403,10 +407,11 @@ async def on_error(ctx, error):
 
 
 @bot.command(name="give-role")
+@commands.has_permissions(manage_roles=True)
 async def give_role(ctx, name, member: discord.Member = None):
     if member is None:
         member = ctx.author
-    role = discord.utils.get(ctx.guild.roles, name=name)
+    role = discord.utils.get(member.server.roles, name=name)
     await member.add_roles(role)
 
 
