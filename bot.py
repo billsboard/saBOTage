@@ -10,7 +10,7 @@ from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
 bot.remove_command("help")  # replaces old help command with custom help
-BOTID = 504493647316647936
+BOT_ID = 504493647316647936
 
 
 """EVENTS"""
