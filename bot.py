@@ -655,7 +655,7 @@ async def kill(ctx, member: discord.Member, *args):
     if member.id == BOT_ID:
         await ctx.send("You can't make me kill myself!")
     else:
-        await ctx.send("{} was {} by a {}.".format(member.mention, random.choice(verbs), " ".join(args)))
+        await ctx.send("{} was {} by {}.".format(member.mention, random.choice(verbs), " ".join(args)))
         
 
 """UTILITIES"""
