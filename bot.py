@@ -651,7 +651,7 @@ async def kill(ctx, member: discord.Member, *args):
         "chopped into tiny, sub-atomic particles",
         "ferociously stabbed"
     )
-\
+
     if member.id == BOT_ID:
         await ctx.send("You can't make me kill myself!")
     else:
