@@ -10,6 +10,7 @@ from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
 bot.remove_command("help")  # replaces old help command with custom help
+BOTID = 504493647316647936
 
 
 """EVENTS"""
@@ -650,7 +651,11 @@ async def kill(ctx, member: discord.Member, *args):
         "chopped into tiny, sub-atomic particles",
         "ferociously stabbed"
     )
-    await ctx.send("{} was {} by a {}.".format(member.mention, random.choice(verbs), " ".join(args)))
+\
+    if member.id == BOT_ID:
+        await ctx.send("You can't make me kill myself!")
+    else:
+        await ctx.send("{} was {} by a {}.".format(member.mention, random.choice(verbs), " ".join(args)))
         
 
 """UTILITIES"""
