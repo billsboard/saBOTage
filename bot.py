@@ -774,9 +774,7 @@ async def on_error(ctx, error):
 @bot.command()  # gets a definition of a word from the urban dictionary
 async def urban(ctx, word, define = 1):
     try:
-        if not ctx.channel.is_nsfw():
-            return await ctx.send("**You can't use this command here.**")
-
+        return await ctx.send("**You can't use this command here.**")
         urban_data = requests.get("http://urbanscraper.herokuapp.com/search/{}".format(word.lower())).json()
 
         await ctx.send("**Definition:** {}".format(urban_data[define - 1]["definition"]))
