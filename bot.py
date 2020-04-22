@@ -102,6 +102,10 @@ async def st_pic(ctx, st_type = None):
 """RANDOM"""
 
 
+@bot.command()  # repeats the input
+async def cat(ctx, *args):
+    await ctx.send(" ".join(args))
+
 @bot.command()  # roll a dice
 async def roll(ctx, sides = 6):
     try:
@@ -175,6 +179,7 @@ async def help(ctx):
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Random =\n"
+       "cat <input>                  :: Repeats the given argument.\n"
        "roll <sides = 6>             :: Rolls a dice with a specified amount of sides.\n"
        "flip                         :: Flips a coin (Heads = 10/21, Tails = 10/21, Side = 1/21).\n"
        "card                         :: Names a random card from a 52-card deck.\n"
