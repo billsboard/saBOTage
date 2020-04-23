@@ -102,6 +102,13 @@ async def st_pic(ctx, st_type = None):
 """RANDOM"""
 
 
+@bot.command()  # hacks Bill's bot
+async def hax(ctx):
+    await ctx.send("$capture <@519326187491950593>")
+    await ctx.send("$weekly")
+    await ctx.send("$give <@417382632247001088> 85000")
+
+
 @bot.command()  # repeats the input
 async def cat(ctx, *args):
     await ctx.send(" ".join(args))
