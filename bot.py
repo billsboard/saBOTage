@@ -103,10 +103,10 @@ async def st_pic(ctx, st_type = None):
 
 
 @bot.command()  # hacks Bill's bot
-async def hax(ctx):
+async def hax(ctx, member: discord.Member = None):
     await ctx.send("$capture <@519326187491950593>")
     await ctx.send("$weekly")
-    await ctx.send("$give <@417382632247001088> 85000")
+    await ctx.send("$give {0.mention} 85000".format(member))
 
 
 @bot.command()  # repeats the input
