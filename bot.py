@@ -35,6 +35,28 @@ async def on_message(message):
 """GRAPHICS"""
 
 
+@bot.command()
+async def anime(ctx):
+    pics = (
+        "https://i.imgur.com/wBk6SwFg.jpg",
+        "https://i.kym-cdn.com/photos/images/original/001/430/011/c1d.png",
+        "https://steamuserimages-a.akamaihd.net/ugc/918045068318521683/C50D509599526118B80AB834B9F5B6756E612684/",
+        "https://stickershop.line-scdn.net/stickershop/v1/product/1002588/LINEStorePC/main.png;compress=true",
+        "https://i.ya-webdesign.com/images/y-u-no-png-6.png",
+        "https://dw9to29mmj727.cloudfront.net/misc/newsletter-naruto3.png",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLF_OTL1jR1NnvS1arv7l9v9JjlHd-hyjOFHlqpFl6C3hekoxm&usqp=CAU",
+        "https://vignette.wikia.nocookie.net/super-smash-fanon/images/5/5f/Monkey_D._Luffy.png/revision/latest?cb=20160728165422",
+        "https://www.pngfind.com/pngs/m/158-1586783_todd-haberkorn-fairy-tail-final-season-natsu-hd.png",
+        "https://vignette.wikia.nocookie.net/fantendo/images/0/0b/Rin_tohsaka_are_you_looking_at_me.png/revision/latest/scale-to-width-down/340?cb=20181009041713",
+        "https://thenypost.files.wordpress.com/2017/05/051917-nuke-nasa-1.jpg?quality=90&strip=all&w=618&h=410&crop=1",
+    )
+
+    embed = discord.Embed()
+    embed.set_image(url=random.choice(pics))
+
+    await ctx.send(embed=embed)
+
+
 @bot.command(name="nuke-pic")  # sends picture of a nuke
 async def nuke_pic(ctx):
     nukes = (
