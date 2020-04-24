@@ -673,17 +673,17 @@ async def on_error(ctx, error):
 @bot.command()
 async def kill(ctx, member: discord.Member, *args):
     verbs = (
-        "destroyed",
-        "sliced in half",
-        "brutally murdered",
+        "sexually abused",
+        "blended *(in blender)*",
+        "stomped on several times",
         "absolutely demolished",
-        "struck",
-        "beaten to death",
-        "trampled on",
-        "tortured",
+        "drowned, beaten, hammered, stabbed, and poisoned 43 times",
+        "bored to death (literally)",
+        "ran over",
+        "wrapped into a dumpling and then eaten",
         "gruelingly dissected",
         "chopped into tiny, sub-atomic particles",
-        "ferociously stabbed"
+        "diarrhea'd on"
     )
 
     if member.id == BOT_ID:
