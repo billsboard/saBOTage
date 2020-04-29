@@ -18,7 +18,7 @@ BOT_ID = 504493647316647936
 
 @bot.event  # checks if bot is ready
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name="//help"))
+    await bot.change_presence(game=discord.Game(name="//help"))
     print("Bot is ready!")
 
 
@@ -31,11 +31,6 @@ async def on_message(message):
         await message.channel.send("Bot prefix is **//**")
     await bot.process_commands(message)
     
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
-        return
-    raise error
         
 """GRAPHICS"""
 
