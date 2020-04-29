@@ -697,9 +697,9 @@ async def kill(ctx, member: discord.Member, *args):
 
 
 @bot.command(name="eval")
-async def ev(ctx, *args):  # performs eval() function in Python
+async def _eval(ctx, *, expr):  # performs eval() function in Python
     try:
-        await ctx.send(str(eval(' '.join(args))))
+        await ctx.send(str(eval(expr)))
     except:
         await ctx.send("```{}```".format(traceback.print_exc()))
 
