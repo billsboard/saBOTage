@@ -30,7 +30,12 @@ async def on_message(message):
     if message.content == "<@504493647316647936>":
         await message.channel.send("Bot prefix is **//**")
     await bot.process_commands(message)
-        
+    
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        return
+    raise error
         
 """GRAPHICS"""
 
