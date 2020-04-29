@@ -246,6 +246,7 @@ async def help(ctx):
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
        "= Utilities =\n"
+       "eval <expr>                  :: Evaluates expression <expr> in Python using the eval() function."
        "PvsT                         :: Compares Pewdiepie and T-Series's subscriber counts.\n"
        "sub-count <username>         :: Gets subscriber count of youtuber. (remove symbols/spaces in <username>).\n"
        "view-count <username>        :: Gets view count of youtuber. (remove symbols/spaces in <username>).\n"
