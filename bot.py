@@ -695,6 +695,12 @@ async def kill(ctx, member: discord.Member, *args):
 """UTILITIES"""
 
 
+async def eval(ctx, *args):  # performs eval() function in Python
+    try:
+        await ctx.send(str(eval(' '.join(args))))
+    except:
+        await ctx.send("```{}```".format(traceback.print_exc()))
+
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
 @bot.command(name="PvsT")  # Calculates sub count of pewdiepie and T-Series
