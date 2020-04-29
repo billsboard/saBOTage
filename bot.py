@@ -701,7 +701,7 @@ async def _eval(ctx, *, expr):  # performs eval() function in Python
     try:
         await ctx.send(str(eval(expr)))
     except:
-        await ctx.send("```{}```".format(traceback.print_exc()))
+        await ctx.send("Invalid return!")
 
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
