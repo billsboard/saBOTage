@@ -877,7 +877,6 @@ async def wiki(ctx, *args):
     wiki_data = "https://en.wikipedia.org/wiki/{}".format(name.lower())
     await ctx.send(wiki_data)
 
-
 @bot.command()
 async def yt(ctx, *args):
     search = ""
@@ -891,9 +890,12 @@ async def yt(ctx, *args):
 
     for vid in range(0, 5):
         await ctx.send("**[{}]:** {}".format(vid + 1, yt_url["items"][vid]["snippet"]["title"]))
-
+    
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+    
     await ctx.send("\n*Input the number of the video you wish to choose.*")
-    num = await bot.wait_for("message", timeout=10)
+    num = await bot.wait_for("message", check=check, timeout=10)
 
     if num is None:
         await ctx.send("**Sorry, you took too long.**")
