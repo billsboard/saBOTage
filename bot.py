@@ -7,14 +7,14 @@ import discord
 import os
 import random
 import requests
-import threading
+import signal
 import time
 from discord.ext import commands
 from nltk.corpus import wordnet
 
-bot = commands.Bot(command_prefix='t!')  # bot prefix for all bot commands
+bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
 bot.remove_command("help")  # replaces old help command with custom help
-BOT_ID = 000
+BOT_ID = 504493647316647936
 
 
 """EVENTS"""
@@ -22,7 +22,7 @@ BOT_ID = 000
 
 @bot.event  # checks if bot is ready
 async def on_ready():
-    #await bot.change_presence(game=discord.Game(name="//help"))
+    await bot.change_presence(activity=discord.Game(name="//help"))
     print("Bot is ready!")
 
 
@@ -692,22 +692,19 @@ async def kill(ctx, member: discord.Member, *args):
 
 """UTILITIES"""
 
-
 def eval_helper(expr):
     try:
         return str(eval(expr))
     except:
         return "Invalid return!"
 
-
 @bot.command(name="eval")
 async def _eval(ctx, *, expr):  # performs eval() function in Python
-    print("eval called: " + expr)
     loop = asyncio.get_event_loop()
     with concurrent.futures.ProcessPoolExecutor() as pool:
         result = await loop.run_in_executor(pool, eval_helper, expr)
         await ctx.send(result)
-
+        await ctx.send("Invalid return!")
 
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
@@ -887,7 +884,6 @@ async def wiki(ctx, *args):
     wiki_data = "https://en.wikipedia.org/wiki/{}".format(name.lower())
     await ctx.send(wiki_data)
 
-
 @bot.command()
 async def yt(ctx, *args):
     search = ""
@@ -901,9 +897,12 @@ async def yt(ctx, *args):
 
     for vid in range(0, 5):
         await ctx.send("**[{}]:** {}".format(vid + 1, yt_url["items"][vid]["snippet"]["title"]))
-
+    
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+    
     await ctx.send("\n*Input the number of the video you wish to choose.*")
-    num = await bot.wait_for("message", timeout=10)
+    num = await bot.wait_for("message", check=check, timeout=10)
 
     if num is None:
         await ctx.send("**Sorry, you took too long.**")
