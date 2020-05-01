@@ -697,7 +697,8 @@ async def kill(ctx, member: discord.Member, *args):
 
 """UTILITIES"""
 
-def eval_helper(expr):
+
+def eval_helper(ctx, expr):
     try:
         await ctx.send(str(eval(expr)))
     except:
@@ -705,7 +706,7 @@ def eval_helper(expr):
 
 @bot.command(name="eval")
 async def _eval(ctx, *, expr):  # performs eval() function in Python
-    p = Process(target=eval_helper, args=(expr,))
+    p = Process(target=eval_helper, args=(ctx, expr,))
     p.start()
     time.sleep(10)
     if p.is_alive():
