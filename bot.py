@@ -5,7 +5,7 @@ import discord
 import os
 import random
 import requests
-import threading
+import signal
 import time
 from discord.ext import commands
 from nltk.corpus import wordnet
@@ -20,7 +20,7 @@ BOT_ID = 504493647316647936
 
 @bot.event  # checks if bot is ready
 async def on_ready():
-    await bot.change_presence(game=discord.Game(name="//help"))
+    await bot.change_presence(activity=discord.Game(name="//help"))
     print("Bot is ready!")
 
 
@@ -699,14 +699,9 @@ async def eval_helper(ctx, expr):
 
 @bot.command(name="eval")
 async def _eval(ctx, *, expr):  # performs eval() function in Python
-    p = threading.Thread(target=eval_helper, args=(ctx, expr,))
-    p.start()
-    time.sleep(10)
-    if p.is_alive():
-        await ctx.send("**Code took too long. Terminating...**")
-        p.terminate()
-    p.join()
-
+    signal.signal(signal.SIGALRM, eval_helper)
+    signal.alarm(10)
+    
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
 @bot.command(name="PvsT")  # Calculates sub count of pewdiepie and T-Series
