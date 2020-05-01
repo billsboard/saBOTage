@@ -697,9 +697,9 @@ async def _eval(ctx, *, expr):  # performs eval() function in Python
         await ctx.send(str(eval(expr)))
     except:
         await ctx.send("Invalid return!")
-    
-yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 """
+
+yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
 @bot.command(name="PvsT")  # Calculates sub count of pewdiepie and T-Series
 async def pewdiepie_vs_tseries(ctx):
