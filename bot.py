@@ -1,6 +1,8 @@
 """Please do NOT abuse my api keys, get your own."""
 
 import asyncio
+import concurrent
+
 import discord
 import os
 import random
@@ -10,9 +12,9 @@ import time
 from discord.ext import commands
 from nltk.corpus import wordnet
 
-bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
+bot = commands.Bot(command_prefix='t!')  # bot prefix for all bot commands
 bot.remove_command("help")  # replaces old help command with custom help
-BOT_ID = 504493647316647936
+BOT_ID = 000
 
 
 """EVENTS"""
@@ -20,7 +22,7 @@ BOT_ID = 504493647316647936
 
 @bot.event  # checks if bot is ready
 async def on_ready():
-    await bot.change_presence(game=discord.Game(name="//help"))
+    #await bot.change_presence(game=discord.Game(name="//help"))
     print("Bot is ready!")
 
 
@@ -691,21 +693,21 @@ async def kill(ctx, member: discord.Member, *args):
 """UTILITIES"""
 
 
-async def eval_helper(ctx, expr):
+def eval_helper(expr):
     try:
-        await ctx.send(str(eval(expr)))
+        return str(eval(expr))
     except:
-        await ctx.send("Invalid return!")
+        return "Invalid return!"
+
 
 @bot.command(name="eval")
 async def _eval(ctx, *, expr):  # performs eval() function in Python
-    p = threading.Thread(target=eval_helper, args=(ctx, expr,))
-    p.start()
-    time.sleep(10)
-    if p.is_alive():
-        await ctx.send("**Code took too long. Terminating...**")
-        p.terminate()
-    p.join()
+    print("eval called: " + expr)
+    loop = asyncio.get_event_loop()
+    with concurrent.futures.ProcessPoolExecutor() as pool:
+        result = await loop.run_in_executor(pool, eval_helper, expr)
+        await ctx.send(result)
+
 
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
