@@ -5,7 +5,9 @@ import discord
 import os
 import random
 import requests
+import time
 from discord.ext import commands
+from multiprocessing import Process
 from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
@@ -695,13 +697,21 @@ async def kill(ctx, member: discord.Member, *args):
 
 """UTILITIES"""
 
-
-@bot.command(name="eval")
-async def _eval(ctx, *, expr):  # performs eval() function in Python
+def eval_helper(expr):
     try:
         await ctx.send(str(eval(expr)))
     except:
         await ctx.send("Invalid return!")
+
+@bot.command(name="eval")
+async def _eval(ctx, *, expr):  # performs eval() function in Python
+    p = Process(target=eval_helper, args=(expr,))
+    p.start()
+    time.sleep(10)
+    if p.is_alive():
+        await ctx.send("**Code took too long. Terminating...**")
+        p.terminate()
+    p.join()
 
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
 
