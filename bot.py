@@ -5,9 +5,9 @@ import discord
 import os
 import random
 import requests
+import threading
 import time
 from discord.ext import commands
-from multiprocessing import Process
 from nltk.corpus import wordnet
 
 bot = commands.Bot(command_prefix='//')  # bot prefix for all bot commands
@@ -126,13 +126,6 @@ async def st_pic(ctx, st_type = None):
 """RANDOM"""
 
 
-@bot.command()  # hacks Bill's bot
-async def hax(ctx, member: discord.Member = None):
-    await ctx.send("$capture <@519326187491950593>")
-    await ctx.send("$weekly")
-    await ctx.send("$give {0.mention} 85000".format(member))
-
-
 @bot.command()  # repeats the input
 async def cat(ctx, *args):
     await ctx.send(" ".join(args))
@@ -205,7 +198,7 @@ async def help(ctx):
        "nuke-pic                     :: Picks a random picture of a nuke.\n"
        "dog-pic                      :: Picks a random picture of a dog.\n"
        "cat-pic                      :: Picks a random picture of a cat.\n"
-       "st-pic                       :: Picks a random picture of a square twitter (type = text, paint, ink, draw).\n"
+       "st-pic                       :: Picks a random picture of a square twitter type = (text, paint, ink, draw).\n"
        "meme                         :: Shows a meme.\n"
        "```")
     await bot.get_user(ctx.author.id).send("```asciidoc\n"
@@ -706,7 +699,7 @@ async def eval_helper(ctx, expr):
 
 @bot.command(name="eval")
 async def _eval(ctx, *, expr):  # performs eval() function in Python
-    p = Process(target=eval_helper, args=(ctx, expr,))
+    p = threading.Thread(target=eval_helper, args=(ctx, expr,))
     p.start()
     time.sleep(10)
     if p.is_alive():
