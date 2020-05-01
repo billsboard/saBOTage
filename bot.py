@@ -690,19 +690,16 @@ async def kill(ctx, member: discord.Member, *args):
 
 """UTILITIES"""
 
-
-async def eval_helper(ctx, expr):
+"""
+@bot.command(name="eval")
+async def _eval(ctx, *, expr):  # performs eval() function in Python
     try:
         await ctx.send(str(eval(expr)))
     except:
         await ctx.send("Invalid return!")
-
-@bot.command(name="eval")
-async def _eval(ctx, *, expr):  # performs eval() function in Python
-    signal.signal(signal.SIGALRM, eval_helper)
-    signal.alarm(10)
     
 yt_api_key = "AIzaSyBR68aLaWlBarv_g-ND8afn_JnSSjqdU4w"  # youtube api-key
+"""
 
 @bot.command(name="PvsT")  # Calculates sub count of pewdiepie and T-Series
 async def pewdiepie_vs_tseries(ctx):
